@@ -15,6 +15,6 @@ def openLog():
     print(f.read(),end = '')
     logStr = tail(f)
     for line in logStr:
-        print(line.strip())
+        print(line.strip()) # вместо принт вставляем text.insert
 
 openLog()
