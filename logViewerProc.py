@@ -1,5 +1,4 @@
 import time,threading
-from tkinter.filedialog import *
 
 #  постоянное сканирование файла
 def tail(f):
@@ -12,13 +11,11 @@ def tail(f):
         yield line
 
 # открываем нужный файл для просмотра
-def open_file():
-    op = askopenfilename()  # возвращает путь к файлу полностью
-    f = open(op,'r')
-    import logViewerForm
-    logViewerForm.txt.insert(END,f.read())
+def open_file(path_to_file):
+    f = open(path_to_file,'r')
+    print(f.read())
+    print(f.tell())
+    #logViewerForm.txt.insert(END,f.read()) # заменить на то что не будет вызывать импорт
     for line in tail(f):
-        logViewerForm.txt.insert(END,line)
-
-# поток для просмотра файла
-th = threading.Thread(target = open_file, name=1)
+        print(f.tell())
+        #logViewerForm.txt.insert(END,line)# заменить на то что не будет вызывать импорт
