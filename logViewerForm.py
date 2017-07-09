@@ -2,31 +2,25 @@ import tkinter
 from tkinter.filedialog import askopenfilename
 import logViewerProc
 import threading
-import os
-import time
 
+class show_text():
+    def __init__(self, txt_object):
+        self.txt = txt_object
+
+    def show(self, some_string):
+        txt.insert(tkinter.END,some_string)
 
 # функция стартер
 def starter():
+    change_func = show_text(txt)
     # поток для просмотра файла
-    th1 = threading.Thread(target = logViewerProc.open_file, args=(r'{}'.format(path_to_file()),),daemon = True , name= 'read file')
-    th2 = threading.Thread(target = listen_pipe, daemon = True, name= 'listen_pipe')
+    th1 = threading.Thread(target = logViewerProc.open_file, args=(r'{}'.format(path_to_file()),change_func),\
+                           daemon = True , name= 'read_file')
     th1.start()
-    th2.start()
 
 def path_to_file():
     op = askopenfilename()
     return op
-
-def listen_pipe():
-    while True:
-        read_from_pipe = os.fdopen(logViewerProc.r_file,'r', 1)
-        str = read_from_pipe.read()
-        if not str:
-            continue
-        else:
-            txt.insert(tkinter.END,str)
-
 
 # создаем GUI
 root = tkinter.Tk()
