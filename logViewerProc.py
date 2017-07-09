@@ -1,18 +1,20 @@
 import time
 
-#  постоянное сканирование файла
+
+#  file scanning
 def tail(f):
-    f.seek(0,2) # переходим в конец файла
+    f.seek(0, 2)  # go to the end of the file
     while True:
-        line = f.readline() # читаем следующую строку
-        if not line:  # если строки нет - ждем
+        line = f.readline()  # read the last line
+        if not line:  # if not have any line - wait 1 second
             time.sleep(1)
             continue
         yield line
 
-# открываем нужный файл для просмотра
-def open_file(path_to_file, write_in_GUI):
-    f = open(path_to_file,'r')
-    write_in_GUI.show(f.read())
+
+# open the file what we need
+def open_file(path_to_file, write_in_gui):
+    f = open(path_to_file, 'r')
+    write_in_gui.show(f.read())  # display what in the file we have now
     for line in tail(f):
-        write_in_GUI.show(line)
+        write_in_gui.show(line)  # display new line in the file
