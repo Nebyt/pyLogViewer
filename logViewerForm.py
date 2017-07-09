@@ -38,9 +38,13 @@ root.wm_title("LogViewer")
 
 m = tkinter.Menu(root)
 root.config(menu=m)
+scroll = tkinter.Scrollbar(root)
 
-txt = tkinter.Text(root, width=90, height=30, font="12")
-txt.pack()
+txt = tkinter.Text(root, bg = '#404040', fg = '#ffffff', width=90, height=30, font="12",yscrollcommand = scroll.set)
+scroll.config(command = txt.yview)
+
+txt.pack(side = 'left')
+scroll.pack(side = tkinter.LEFT,fill=tkinter.Y)
 
 m.add_command(label="Open...", command=starter)
 
